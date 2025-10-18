@@ -54,7 +54,7 @@ function App() {
       <h1>{athleteName}'s Personal Strava Dashboard</h1>
       <h2>2025 Total Running Mileage</h2>
       <div style={{ fontSize: '0.9em', color: '#666', marginBottom: '20px', fontStyle: 'italic' }}>
-        Updated daily via GitHub Actions
+        Updated every 15 minutes via GitHub Actions
       </div>
       
       <div className="card">
@@ -68,7 +68,7 @@ function App() {
               ❌ Error: {error}
             </div>
             <div style={{ fontSize: '0.9em', color: '#666' }}>
-              Stats are automatically updated daily. If you're seeing this error, the data may not be generated yet.
+              Stats are automatically updated every 15 minutes. If you're seeing this error, the data may not be generated yet.
             </div>
           </div>
         ) : (
@@ -80,7 +80,7 @@ function App() {
               Last updated: {lastUpdated?.toLocaleString()}
             </div>
             <div style={{ fontSize: '0.8em', color: '#999', marginTop: '5px' }}>
-              � Automatically refreshed daily at 8 AM UTC
+              � Automatically refreshed every 15 minutes.
             </div>
           </div>
         )}
