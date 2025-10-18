@@ -17,8 +17,8 @@ function App() {
       setLoading(true)
       setError(null)
       
-      // Fetch the pre-generated stats file
-      const response = await fetch('/strava-stats.json')
+      // Fetch the pre-generated stats file (relative path works with GitHub Pages)
+      const response = await fetch('./strava-stats.json')
       
       if (!response.ok) {
         throw new Error(`Failed to fetch stats: ${response.status} ${response.statusText}`)
