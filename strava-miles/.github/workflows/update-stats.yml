@@ -29,9 +29,7 @@ jobs:
         STRAVA_CLIENT_SECRET: ${{ secrets.VITE_STRAVA_CLIENT_SECRET }}
         STRAVA_ACCESS_TOKEN: ${{ secrets.VITE_STRAVA_ACCESS_TOKEN }}
         STRAVA_REFRESH_TOKEN: ${{ secrets.VITE_STRAVA_REFRESH_TOKEN }}
-      run: |
-        cd strava-miles
-        
+      run: |        
         # Create a simple Node.js script to fetch Strava data
         cat > fetch-strava-stats.js << 'EOF'
         const https = require('https');
@@ -147,8 +145,8 @@ jobs:
             console.log(`Total YTD running miles: ${statsData.totalMiles}`);
             
             // Write to public directory
-            fs.writeFileSync('public/strava-stats.json', JSON.stringify(statsData, null, 2));
-            console.log('Stats written to public/strava-stats.json');
+            fs.writeFileSync('strava-miles/public/strava-stats.json', JSON.stringify(statsData, null, 2));
+            console.log('Stats written to strava-miles/public/strava-stats.json');
             
           } catch (error) {
             console.error('Error fetching Strava stats:', error);
@@ -164,10 +162,9 @@ jobs:
         
     - name: Commit updated stats
       run: |
-        cd strava-miles
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add public/strava-stats.json
+        git add strava-miles/public/strava-stats.json
         
         # Only commit if there are changes
         if git diff --staged --quiet; then
