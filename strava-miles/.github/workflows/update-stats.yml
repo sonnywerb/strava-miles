@@ -4,9 +4,9 @@ on:
   # Run on push to main
   push:
     branches: [ main ]
-  # Run daily at 8 AM UTC (adjust timezone as needed)
+  # Run every 15 minutes for fresh data
   schedule:
-    - cron: '0 8 * * *'
+    - cron: '*/15 * * * *'
   # Allow manual trigger
   workflow_dispatch:
 
