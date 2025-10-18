@@ -17,6 +17,9 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+.logo.strava:hover {
+  filter: drop-shadow(0 0 2em #ff963faa)
+}
 
 @keyframes logo-spin {
   from {
