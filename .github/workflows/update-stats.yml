@@ -10,6 +10,9 @@ on:
   # Allow manual trigger
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   update-stats:
     runs-on: ubuntu-latest
@@ -161,6 +164,8 @@ jobs:
         node fetch-strava-stats.js
         
     - name: Commit updated stats
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
@@ -171,5 +176,5 @@ jobs:
           echo "No changes to commit"
         else
           git commit -m "Update Strava stats - $(date)"
-          git push
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/sonnywerb/strava-miles.git HEAD:main
         fi
