@@ -1,10 +1,13 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  # Trigger after the update-stats workflow completes
+  workflow_run:
+    workflows: ["Update Strava Stats"]
+    types:
+      - completed
+  # Also allow manual trigger
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -36,11 +39,6 @@ jobs:
         npm ci
         
     - name: Build
-      env:
-        VITE_STRAVA_CLIENT_ID: ${{ secrets.VITE_STRAVA_CLIENT_ID }}
-        VITE_STRAVA_CLIENT_SECRET: ${{ secrets.VITE_STRAVA_CLIENT_SECRET }}
-        VITE_STRAVA_ACCESS_TOKEN: ${{ secrets.VITE_STRAVA_ACCESS_TOKEN }}
-        VITE_STRAVA_REFRESH_TOKEN: ${{ secrets.VITE_STRAVA_REFRESH_TOKEN }}
       run: |
         cd strava-miles
         npm run build
