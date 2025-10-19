@@ -65,11 +65,8 @@ function App() {
         </a>
       </div>
 
-      <h1>{athleteName}'s Personal Strava Dashboard</h1>
+      <h1>Team Eric's Strava Dashboard</h1>
       <h2>2025 Total Running Mileage</h2>
-      <div style={{ fontSize: '0.9em', color: '#666', marginBottom: '20px', fontStyle: 'italic' }}>
-        Updated every 15 minutes via GitHub Actions
-      </div>
       
       <div className="card">
         {loading ? (
@@ -94,7 +91,7 @@ function App() {
               Last updated: {lastUpdated?.toLocaleString()}
             </div>
             <div style={{ fontSize: '0.8em', color: '#999', marginTop: '5px' }}>
-              � Automatically refreshed every 15 minutes.
+              � Stats are automatically refreshed every 15 minutes.
             </div>
           </div>
         )}
