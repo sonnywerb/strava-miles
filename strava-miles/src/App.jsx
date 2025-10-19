@@ -18,16 +18,18 @@ function App() {
       setError(null)
       
       // Fetch the pre-generated stats file - try multiple paths for GitHub Pages
+      // Add cache-busting timestamp
+      const timestamp = new Date().getTime();
       let response;
       try {
-        response = await fetch('./strava-stats.json');
+        response = await fetch(`./strava-stats.json?t=${timestamp}`);
         if (!response.ok) {
           // Try absolute path if relative fails
-          response = await fetch('/strava-miles/strava-stats.json');
+          response = await fetch(`/strava-miles/strava-stats.json?t=${timestamp}`);
         }
       } catch (err) {
         // Fallback to absolute path
-        response = await fetch('/strava-miles/strava-stats.json');
+        response = await fetch(`/strava-miles/strava-stats.json?t=${timestamp}`);
       }
       
       if (!response.ok) {
