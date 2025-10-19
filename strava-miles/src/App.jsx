@@ -17,8 +17,18 @@ function App() {
       setLoading(true)
       setError(null)
       
-      // Fetch the pre-generated stats file (relative path works with GitHub Pages)
-      const response = await fetch('./strava-stats.json')
+      // Fetch the pre-generated stats file - try multiple paths for GitHub Pages
+      let response;
+      try {
+        response = await fetch('./strava-stats.json');
+        if (!response.ok) {
+          // Try absolute path if relative fails
+          response = await fetch('/strava-miles/strava-stats.json');
+        }
+      } catch (err) {
+        // Fallback to absolute path
+        response = await fetch('/strava-miles/strava-stats.json');
+      }
       
       if (!response.ok) {
         throw new Error(`Failed to fetch stats: ${response.status} ${response.statusText}`)
@@ -26,7 +36,9 @@ function App() {
       
       const data = await response.json()
       
-      setTotalMiles(data.totalMiles)
+      console.log('Fetched data:', data) // Debug log
+      
+      setTotalMiles(data.totalMiles || 0)
       setLastUpdated(new Date(data.lastUpdated))
       setAthleteName(data.athleteName || 'Eric')
       
