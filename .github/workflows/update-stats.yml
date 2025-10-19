@@ -46,6 +46,11 @@ jobs:
               res.on('data', chunk => data += chunk);
               res.on('end', () => {
                 try {
+                  // Check HTTP status code
+                  if (res.statusCode >= 400) {
+                    reject(new Error(`HTTP ${res.statusCode}: ${data}`));
+                    return;
+                  }
                   resolve(JSON.parse(data));
                 } catch (e) {
                   reject(e);
@@ -106,6 +111,7 @@ jobs:
           try {
             return await makeRequest(options);
           } catch (error) {
+            console.log('API Error:', error.message);
             // If unauthorized and haven't retried, try refreshing token
             if (error.message && error.message.includes('401') && retryCount === 0) {
               console.log('Access token expired, refreshing...');
@@ -127,6 +133,7 @@ jobs:
             
             // Get athlete info
             const athlete = await makeAuthenticatedRequest('/api/v3/athlete', accessToken);
+            console.log('Raw athlete data:', JSON.stringify(athlete, null, 2));
             console.log(`Fetching stats for athlete: ${athlete.firstname} ${athlete.lastname}`);
             
             // Get athlete stats
