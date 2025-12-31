@@ -1,13 +1,13 @@
 {
-  "totalMiles": 671,
-  "lastUpdated": "2025-12-31T01:39:27.929Z",
+  "totalMiles": 679.1,
+  "lastUpdated": "2025-12-31T03:17:04.821Z",
   "athleteName": "Eric Chan",
   "ytdRunTotals": {
-    "count": 212,
-    "distance": 1079937,
-    "moving_time": 388555,
-    "elapsed_time": 428928,
-    "elevation_gain": 7740.799999999999
+    "count": 213,
+    "distance": 1092864,
+    "moving_time": 392979,
+    "elapsed_time": 434193,
+    "elevation_gain": 7856.799999999999
   },
-  "generatedAt": "2025-12-31T01:39:27.929Z"
+  "generatedAt": "2025-12-31T03:17:04.821Z"
 }
